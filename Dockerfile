@@ -12,6 +12,20 @@ EXPOSE 8000
 # Set environment variables
 ENV PORT=8000
 ENV DBTYPE=postgres
+ENV DATABASE_URL=""
 
-# Command to run the application
-CMD ["./bin/focalboard-server"] 
+# Create an entrypoint script to handle environment variable substitution
+COPY <<EOF /docker-entrypoint.sh
+#!/bin/sh
+set -e
+
+# Replace environment variables in config.json
+sed -i "s|\${DATABASE_URL}|$DATABASE_URL|g" /opt/focalboard/config.json
+
+exec ./bin/focalboard-server
+EOF
+
+RUN chmod +x /docker-entrypoint.sh
+
+# Use the entrypoint script
+ENTRYPOINT ["/docker-entrypoint.sh"] 

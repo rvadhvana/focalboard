@@ -1,8 +1,8 @@
 {
-	"serverRoot": "${RENDER_EXTERNAL_URL}",
+	"serverRoot": "https://focalboard-np1s.onrender.com",
 	"port": 8000,
 	"dbtype": "postgres",
-	"dbconfig": "./focalboard.db?_busy_timeout=5000",
+	"dbconfig": "${DATABASE_URL}",
 	"dbpingattempts": 5,
 	"dbtableprefix": "",
 	"postgres_dbconfig": "${DATABASE_URL}",
