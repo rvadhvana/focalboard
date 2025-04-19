@@ -9,19 +9,9 @@ WORKDIR /opt/focalboard
 # Copy custom configuration
 COPY config.json ./config.json
 
-# Create an entrypoint script to handle environment variable substitution
-COPY <<EOF /docker-entrypoint.sh
-#!/bin/sh
-set -e
-
-# Replace environment variables in config.json
-sed -i "s|\${DATABASE_URL}|$DATABASE_URL|g" /opt/focalboard/config.json
-
-exec ./bin/focalboard-server
-EOF
-
-# Set permissions
-RUN chmod +x /docker-entrypoint.sh
+# Create an entrypoint script with executable permissions
+RUN echo '#!/bin/sh\nset -e\n\n# Replace environment variables in config.json\nsed -i "s|\${DATABASE_URL}|$DATABASE_URL|g" /opt/focalboard/config.json\n\nexec ./bin/focalboard-server' > /docker-entrypoint.sh && \
+    chmod +x /docker-entrypoint.sh
 
 # Expose the port
 EXPOSE 8000
