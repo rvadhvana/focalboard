@@ -1,7 +1,10 @@
 FROM mattermost/focalboard:latest
 
+# Create directory for configuration
+WORKDIR /opt/focalboard
+
 # Copy custom configuration
-COPY config.json /opt/focalboard/config.json
+COPY config.json ./config.json
 
 # Expose the port
 EXPOSE 8000

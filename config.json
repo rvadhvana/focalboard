@@ -1,6 +1,6 @@
 {
 	"serverRoot": "${RENDER_EXTERNAL_URL}",
-	"port": "${PORT}",
+	"port": 8000,
 	"dbtype": "postgres",
 	"dbconfig": "./focalboard.db?_busy_timeout=5000",
 	"dbpingattempts": 5,
